@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "tell-me-what-you-want-native",
+    "name": "Tell me what you want",
     "slug": "tell-me-what-you-want-native",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,9 +13,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
