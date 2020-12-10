@@ -4,6 +4,14 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { logIn, logOut } from "../redux/usersSlice";
 import Auth from "../navigation/Auth";
 import { NavigationContainer } from "@react-navigation/native";
+import styled from "styled-components/native";
+import Main from "../navigation/Main";
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default () => {
   const { isLoggedIn } = useSelector((state) => state.usersReducer);
@@ -11,13 +19,7 @@ export default () => {
 
   return (
     <NavigationContainer>
-      {isLoggedIn ? (
-        <TouchableOpacity onPress={() => dispatch(logOut())}>
-          <Text>Hello name</Text>
-        </TouchableOpacity>
-      ) : (
-        <Auth />
-      )}
+      {isLoggedIn ? <Main /> : <Auth />}
     </NavigationContainer>
   );
 };
