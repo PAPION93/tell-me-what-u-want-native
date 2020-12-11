@@ -24,15 +24,14 @@ export const { logIn, logOut } = userSlice.actions;
 export const userLogin = (form) => async (dispatch) => {
   try {
     const {
-      data: { access_token },
+      data: { token },
     } = await api.login(form);
-    if (access_token) {
-      dispatch(logIn({ access_token }));
+    alert(token);
+    if (token) {
+      dispatch(logIn({ token }));
     }
-    alert(access_token);
   } catch (e) {
-    alert(e);
-    // alert("Wrong user/password");
+    if (e.response.status == 401) alert("Wrong user/password");
   }
 };
 
