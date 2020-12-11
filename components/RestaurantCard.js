@@ -64,8 +64,8 @@ const FavButton = styled.View`
 const TOpacity = styled.TouchableOpacity`
   position: absolute;
   z-index: 10;
-  right: 10;
-  top: 10;
+  right: 10px;
+  top: 10px;
 `;
 
 function getIconName(isFav) {

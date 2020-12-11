@@ -16,7 +16,7 @@ const Container = styled.View`
 const ScrollView = styled.ScrollView`
   /* background-color: ${colors.red}; */
   position: absolute;
-  bottom: 30;
+  bottom: 30px;
 `;
 
 const RoomContainer = styled.View`
