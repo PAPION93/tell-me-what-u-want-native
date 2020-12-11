@@ -49,7 +49,6 @@ const LoadMoreText = styled.Text`
 
 export default ({ restaurants, increasePage }) => {
   const navigation = useNavigation();
-  console.log(restaurants);
   return (
     <Container>
       {restaurants.length === 0 ? (

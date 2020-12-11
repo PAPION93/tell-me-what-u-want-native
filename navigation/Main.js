@@ -7,7 +7,7 @@ import colors from "../colors";
 import BackBtn from "../components/Auth/BackBtn";
 import MapScreen from "../screens/Main/Map";
 import Explore from "../screens/Main/Explore";
-// import Saved from "../screens/Main/Saved";
+import Saved from "../screens/Main/Saved";
 import Profile from "../screens/Main/Profile";
 // import Room from "../screens/Main/Room";
 // import Search from "../screens/Main/Search";
@@ -53,7 +53,7 @@ const Tabs = () => (
   >
     <TabsNavigator.Screen name="Explore" component={Explore} />
     <TabsNavigator.Screen name="Map" component={MapScreen} />
-    {/* <TabsNavigator.Screen name="Saved" component={Saved} /> */}
+    <TabsNavigator.Screen name="Saved" component={Saved} />
     <TabsNavigator.Screen name="Profile" component={Profile} />
   </TabsNavigator.Navigator>
 );

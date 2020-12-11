@@ -36,4 +36,32 @@ export const userLogin = (form) => async (dispatch) => {
   }
 };
 
+export const getFavs = () => async (dispatch, getState) => {
+  const {
+    usersReducer: { id, token },
+  } = getState();
+
+  try {
+    const data = await api.favs(id, token);
+    dispatch(setFavs(data));
+  } catch (e) {
+    if (e.response.status == 401) {
+      dispatch(logOut());
+    }
+    console.warn(e.response.status);
+  }
+};
+
+export const toggleFav = (roomId) => async (dispatch, getState) => {
+  const {
+    usersReducer: { id, token },
+  } = getState();
+  try {
+    const { data, status } = await api.toggleFavs(id, roomId, token);
+    dispatch(setFav({ roomId }));
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
 export default userSlice.reducer;

@@ -38,7 +38,6 @@ export default ({ restaurants }) => {
   const handleRegionChange = async () => {
     try {
       const { northEast, southWest } = await mapRef.current?.getMapBoundaries();
-      console.log(northEast, southWest);
     } catch (e) {
       console.warn(e);
     }

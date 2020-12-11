@@ -103,6 +103,7 @@ const RestaurantCard = ({
         <FavButton>
           <Ionicons
             size={28}
+            name="heart"
             // color={isFav ? colors.red : "black"}
             // name={getIconName(isFav)}
           />
