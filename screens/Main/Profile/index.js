@@ -1,6 +1,8 @@
-import React from "react";
-import { Text } from "react-native";
+import ProfileContainer from "./ProfileContainer";
+import { connect } from "react-redux";
 
-export default () => {
-  <Text>Profile</Text>;
-};
+function mapStateToProps(state) {
+  return { user: state.usersReducer };
+}
+
+export default connect(mapStateToProps)(ProfileContainer);

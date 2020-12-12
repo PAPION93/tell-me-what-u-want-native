@@ -84,7 +84,6 @@ function getIconName(isFav) {
 }
 
 const RestaurantCard = ({
-  key,
   id,
   name,
   category,

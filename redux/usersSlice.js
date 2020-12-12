@@ -26,7 +26,7 @@ export const userLogin = (form) => async (dispatch) => {
     const {
       data: { token },
     } = await api.login(form);
-    alert(token);
+
     if (token) {
       dispatch(logIn({ token }));
     }
