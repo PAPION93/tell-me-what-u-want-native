@@ -2,7 +2,7 @@ import ProfileContainer from "./ProfileContainer";
 import { connect } from "react-redux";
 
 function mapStateToProps(state) {
-  return { user: state.usersReducer };
+  return { name: state.usersReducer.name };
 }
 
 export default connect(mapStateToProps)(ProfileContainer);

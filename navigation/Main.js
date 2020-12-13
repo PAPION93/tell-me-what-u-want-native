@@ -32,13 +32,13 @@ const Tabs = () => (
       tabBarIcon: ({ focused }) => {
         const isAndroid = utils.isAndroid();
         let iconName = `${isAndroid ? "md-" : "ios-"}`;
-        if (route.name === "Explore") {
+        if (route.name === "검색") {
           iconName += "search";
-        } else if (route.name === "Saved") {
+        } else if (route.name === "저장 목록") {
           iconName += "heart";
-        } else if (route.name === "Map") {
+        } else if (route.name === "지도") {
           iconName += "map";
-        } else if (route.name === "Profile") {
+        } else if (route.name === "프로필") {
           iconName += "person";
         }
         return (
@@ -51,10 +51,10 @@ const Tabs = () => (
       },
     })}
   >
-    <TabsNavigator.Screen name="Explore" component={Explore} />
-    <TabsNavigator.Screen name="Map" component={MapScreen} />
-    <TabsNavigator.Screen name="Saved" component={Saved} />
-    <TabsNavigator.Screen name="Profile" component={Profile} />
+    <TabsNavigator.Screen name="검색" component={Explore} />
+    <TabsNavigator.Screen name="지도" component={MapScreen} />
+    <TabsNavigator.Screen name="저장 목록" component={Saved} />
+    <TabsNavigator.Screen name="프로필" component={Profile} />
   </TabsNavigator.Navigator>
 );
 

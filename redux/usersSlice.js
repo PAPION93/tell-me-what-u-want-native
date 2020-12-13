@@ -5,11 +5,13 @@ const userSlice = createSlice({
   name: "users",
   initialState: {
     isLoggedIn: false,
+    name: null,
     token: null,
   },
   reducers: {
     logIn(state, action) {
       state.isLoggedIn = true;
+      state.name = action.payload.name;
       state.token = action.payload.token;
     },
     logOut(state, action) {
@@ -24,14 +26,16 @@ export const { logIn, logOut } = userSlice.actions;
 export const userLogin = (form) => async (dispatch) => {
   try {
     const {
-      data: { token },
+      data: { name, token },
     } = await api.login(form);
-
-    if (token) {
-      dispatch(logIn({ token }));
+    dispatch(logIn({ name, token }));
+    if (name && token) {
+      dispatch(logIn({ name, token }));
     }
   } catch (e) {
-    if (e.response.status == 401) alert("Wrong user/password");
+    if (e.response.status == 401) {
+      alert("ID 또는 비밀번호를 확인해주세요.");
+    }
   }
 };
 

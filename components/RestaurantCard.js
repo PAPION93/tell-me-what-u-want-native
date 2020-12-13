@@ -27,7 +27,7 @@ const PointContainer = styled.View`
 `;
 
 const PointText = styled.Text`
-  padding-horizontal: 3px;
+  padding: 0px 3px;
 `;
 
 const DescContainer = styled.View`

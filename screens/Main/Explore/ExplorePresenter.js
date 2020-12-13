@@ -13,7 +13,7 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding-horizontal: 15px;
+  padding: 0px 15px;
 `;
 
 const FakeBar = styled.View`
