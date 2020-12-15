@@ -19,7 +19,7 @@ const SlideImage = styled.Image`
   height: 100%;
 `;
 
-const RoomPhotos = ({ photos, factor = 4 }) => (
+const RestaurantPhotos = ({ photos, factor = 4 }) => (
   <PhotoContainer factor={factor}>
     {photos.length === 0 ? (
       <SlideImage
@@ -44,7 +44,7 @@ const RoomPhotos = ({ photos, factor = 4 }) => (
   </PhotoContainer>
 );
 
-RoomPhotos.propTypes = {
+RestaurantPhotos.propTypes = {
   photos: Pt.arrayOf(
     Pt.shape({
       file: Pt.string,
@@ -52,4 +52,4 @@ RoomPhotos.propTypes = {
   ),
 };
 
-export default RoomPhotos;
+export default RestaurantPhotos;

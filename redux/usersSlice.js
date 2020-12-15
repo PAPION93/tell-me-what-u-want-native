@@ -1,16 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import api from "../api";
+import { setFavs, addLike, delLike } from "./restaurantsSlice";
 
 const userSlice = createSlice({
   name: "users",
   initialState: {
     isLoggedIn: false,
+    id: null,
     name: null,
     token: null,
   },
   reducers: {
     logIn(state, action) {
       state.isLoggedIn = true;
+      state.id = action.payload.id;
       state.name = action.payload.name;
       state.token = action.payload.token;
     },
@@ -26,11 +29,10 @@ export const { logIn, logOut } = userSlice.actions;
 export const userLogin = (form) => async (dispatch) => {
   try {
     const {
-      data: { name, token },
+      data: { id, name, token },
     } = await api.login(form);
-    dispatch(logIn({ name, token }));
-    if (name && token) {
-      dispatch(logIn({ name, token }));
+    if (id && name && token) {
+      dispatch(logIn({ id, name, token }));
     }
   } catch (e) {
     if (e.response.status == 401) {
@@ -41,11 +43,13 @@ export const userLogin = (form) => async (dispatch) => {
 
 export const getFavs = () => async (dispatch, getState) => {
   const {
-    usersReducer: { id, token },
+    usersReducer: { token },
   } = getState();
 
   try {
-    const data = await api.favs(id, token);
+    const {
+      data: { data },
+    } = await api.favs(token);
     dispatch(setFavs(data));
   } catch (e) {
     if (e.response.status == 401) {
@@ -55,13 +59,25 @@ export const getFavs = () => async (dispatch, getState) => {
   }
 };
 
-export const toggleFav = (roomId) => async (dispatch, getState) => {
+export const like = (restaurantId) => async (dispatch, getState) => {
   const {
-    usersReducer: { id, token },
+    usersReducer: { token },
   } = getState();
   try {
-    const { data, status } = await api.toggleFavs(id, roomId, token);
-    dispatch(setFav({ roomId }));
+    const { data, status } = await api.like(restaurantId, token);
+    dispatch(addLike({ restaurantId }));
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
+export const dislike = (restaurantId) => async (dispatch, getState) => {
+  const {
+    usersReducer: { token },
+  } = getState();
+  try {
+    const { data, status } = await api.dislike(restaurantId, token);
+    dispatch(delLike({ restaurantId }));
   } catch (e) {
     console.warn(e);
   }

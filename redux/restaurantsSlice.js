@@ -30,19 +30,30 @@ const restaurantsSlice = createSlice({
     setFavs(state, action) {
       state.favs = action.payload;
     },
-    setFav(state, action) {
+    addLike(state, action) {
       const {
-        payload: { roomId },
+        payload: { restaurantId },
       } = action;
-      const room = state.explore.restaurants.find((room) => room.id === roomId);
-      if (room) {
-        if (room.is_fav) {
-          room.is_fav = false;
-          state.favs = state.favs.filter((room) => room.id !== roomId);
-        } else {
-          room.is_fav = true;
-          state.favs = [room, ...state.favs];
-        }
+      const restaurant = state.explore.restaurants.find(
+        (restaurant) => restaurant.id === restaurantId
+      );
+      if (restaurant) {
+        restaurant.likes_count = true;
+        state.favs = [restaurant, ...state.favs];
+      }
+    },
+    delLike(state, action) {
+      const {
+        payload: { restaurantId },
+      } = action;
+      const restaurant = state.explore.restaurants.find(
+        (restaurant) => restaurant.id === restaurantId
+      );
+      if (restaurant) {
+        restaurant.likes_count = false;
+        state.favs = state.favs.filter(
+          (restaurant) => restaurant.id !== restaurantId
+        );
       }
     },
   },
@@ -52,7 +63,8 @@ export const {
   setExploreRestaurants,
   increasePage,
   setFavs,
-  setFav,
+  addLike,
+  delLike,
 } = restaurantsSlice.actions;
 
 export const getRestaurants = (page) => async (dispatch, getState) => {

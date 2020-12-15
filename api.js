@@ -15,12 +15,16 @@ const callApi = async (method, path, data, jwt, params = {}) => {
 };
 
 export default {
-  register: (form) => callApi("post", "/register", form),
   login: (form) => callApi("post", "/login/", form),
+  register: (form) => callApi("post", "/register", form),
+
+  search: (form, token) => callApi("get", "/restaurants", null, token, form),
   restaurants: (page = 1, token) =>
     callApi("get", `/restaurants/?page=${page}`, null, token),
-  favs: (id, token) => callApi("get", `/users/me/favs/`, null, token),
-  toggleFavs: (userId, roomId, token) =>
-    callApi("put", `/users/${userId}/favs/`, { pk: roomId }, token),
-  search: (form, token) => callApi("get", "/rooms/search/", null, token, form),
+
+  favs: (token) => callApi("get", `/users/me/likes`, null, token),
+  like: (restaurantId, token) =>
+    callApi("post", `/restaurants/${restaurantId}/likes`, null, token),
+  dislike: (restaurantId, token) =>
+    callApi("delete", `/restaurants/${restaurantId}/likes`, null, token),
 };

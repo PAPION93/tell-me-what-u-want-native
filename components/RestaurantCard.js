@@ -1,19 +1,15 @@
 import React from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
-import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import utils from "../utils";
 import { useDispatch } from "react-redux";
-import { toggleFav } from "../redux/usersSlice";
+import { like, dislike } from "../redux/usersSlice";
 import colors from "../colors";
 import { useNavigation } from "@react-navigation/native";
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from "react-native-gesture-handler";
-import RoomPhotos from "./RoomPhotos";
-import { Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import RestaurantPhotos from "./RestaurantPhotos";
 
 const Container = styled.View`
   width: 100%;
@@ -52,34 +48,25 @@ const Dot = styled.View`
   padding-right: 3px;
 `;
 
-const FavButton = styled.View`
-  background-color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-`;
-
 const TOpacity = styled.TouchableOpacity`
   position: absolute;
   z-index: 10;
-  right: 10px;
-  top: 10px;
+  right: 5px;
+  top: 5px;
 `;
 
-function getIconName(isFav) {
+function getIconName(isLiked) {
   const isAndroid = utils.isAndroid();
   if (isAndroid) {
-    if (isFav) {
+    if (isLiked == 1) {
       return "md-heart";
     }
-    return "md-heart-empty";
+    return "md-heart-outline";
   } else {
-    if (isFav) {
+    if (isLiked == 1) {
       return "ios-heart";
     }
-    return "ios-heart-empty";
+    return "ios-heart-outline";
   }
 }
 
@@ -91,6 +78,7 @@ const RestaurantCard = ({
   google_point,
   naver_point,
   dining_point,
+  isLiked,
   photos,
   restaurantObj,
 }) => {
@@ -98,17 +86,19 @@ const RestaurantCard = ({
   const navigation = useNavigation();
   return (
     <Container>
-      <TOpacity onPress={() => dispatch(toggleFav(id))}>
-        <FavButton>
-          <Ionicons
-            size={28}
-            name="heart"
-            // color={isFav ? colors.red : "black"}
-            // name={getIconName(isFav)}
-          />
-        </FavButton>
+      <TOpacity
+        onPress={() => {
+          isLiked == 0 ? dispatch(like(id)) : dispatch(dislike(id));
+        }}
+      >
+        <Ionicons
+          size={28}
+          // name="heart-outline"
+          color={isLiked ? colors.red : "white"}
+          name={getIconName(isLiked)}
+        />
       </TOpacity>
-      <RoomPhotos photos={photos} />
+      <RestaurantPhotos photos={photos} />
 
       <TouchableOpacity
         style={{ alignItems: "flex-start" }}
@@ -146,16 +136,19 @@ const RestaurantCard = ({
 
 RestaurantCard.prototype = {
   id: Pt.number.isRequired,
+  name: Pt.string.isRequired,
+  category: Pt.string.isRequired,
+  address: Pt.string.isRequired,
+  google_point: Pt.string.isRequired,
+  naver_point: Pt.string.isRequired,
+  dining_point: Pt.string.isRequired,
   isFav: Pt.bool.isRequired,
-  isSuperHost: Pt.bool.isRequired,
   photos: Pt.arrayOf(
     Pt.shape({
       file: Pt.string,
     })
   ),
-  name: Pt.string.isRequired,
-  price: Pt.number.isRequired,
-  roomObj: Pt.objectOf.isRequired,
+  restaurantObj: Pt.objectOf.isRequired,
 };
 
 export default RestaurantCard;

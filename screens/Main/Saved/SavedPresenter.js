@@ -26,7 +26,7 @@ export default ({ restaurants }) => (
       {restaurants.length !== 0 ? (
         restaurants.map((restaurant) => (
           <RestaurantCard
-            key={restaurant.key}
+            key={restaurant.id}
             id={restaurant.id}
             name={restaurant.name}
             category={restaurant.category}
@@ -34,6 +34,7 @@ export default ({ restaurants }) => (
             google_point={restaurant.google_point}
             naver_point={restaurant.naver_point}
             dining_point={restaurant.dining_point}
+            isLiked="1"
             photos={restaurant.images}
             restaurantObj={restaurant.restaurant}
           />
