@@ -10,7 +10,7 @@ const Container = styled.View`
 export default () => (
   <Container>
     <Ionicons
-      name={utils.isAndroid() ? "md-arrow-down" : "ios-arrow-down"}
+      name={utils.isAndroid() ? "md-chevron-down" : "ios-chevron-down"}
       size={28}
     />
   </Container>
