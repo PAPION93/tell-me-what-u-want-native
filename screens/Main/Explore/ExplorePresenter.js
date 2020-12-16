@@ -79,7 +79,7 @@ export default ({ restaurants, increasePage }) => {
                 dining_point={restaurant.dining_point}
                 isLiked={restaurant.likes_count}
                 photos={restaurant.images}
-                restaurantObj={restaurant.restaurant}
+                restaurantObj={restaurant}
               />
             ))}
             <TouchableOpacity onPress={increasePage}>

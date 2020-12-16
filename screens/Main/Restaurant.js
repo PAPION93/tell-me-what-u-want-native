@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
-import RoomPhotos from "../../components/RoomPhotos";
+import RestaurantPhotos from "../../components/RestaurantPhotos";
 import colors from "../../colors";
 import utils from "../../utils";
 
@@ -75,21 +75,21 @@ export default ({ route: { params }, navigation }) => {
   }, []);
   return (
     <Container>
-      <RoomPhotos photos={params.photos} factor={2} />
+      <RestaurantPhotos photos={params.images} factor={2} />
       <DataContainer>
         <Address>{params.address}</Address>
         <PropertyInfoContainer>
           <PropertyInfoData>
-            <PropertyInfoText>{formatQtt(params.beds, "bed")}</PropertyInfoText>
+            <PropertyInfoText>{formatQtt(params.name, "bed")}</PropertyInfoText>
           </PropertyInfoData>
           <PropertyInfoData>
             <PropertyInfoText>
-              {formatQtt(params.bedrooms, "bedroom")}
+              {formatQtt(params.name, "bedroom")}
             </PropertyInfoText>
           </PropertyInfoData>
           <PropertyInfoData>
             <PropertyInfoText>
-              {formatQtt(params.bathrooms, "bathroom")}
+              {formatQtt(params.name, "bathroom")}
             </PropertyInfoText>
           </PropertyInfoData>
         </PropertyInfoContainer>
@@ -101,9 +101,7 @@ export default ({ route: { params }, navigation }) => {
             ></Ionicons>
             <CheckTitle>Check-in / Check-out</CheckTitle>
           </CheckTitleContainer>
-          <CheckTime>
-            {formatTime(params.check_in)} / {formatTime(params.check_out)}
-          </CheckTime>
+          <CheckTime>{params.name}</CheckTime>
         </CheckContainer>
         <MapContainer>
           <MapView

@@ -36,7 +36,7 @@ export default ({ restaurants }) => (
             dining_point={restaurant.dining_point}
             isLiked="1"
             photos={restaurant.images}
-            restaurantObj={restaurant.restaurant}
+            restaurantObj={restaurant}
           />
         ))
       ) : (

@@ -9,8 +9,8 @@ import MapScreen from "../screens/Main/Map";
 import Explore from "../screens/Main/Explore";
 import Saved from "../screens/Main/Saved";
 import Profile from "../screens/Main/Profile";
-// import Room from "../screens/Main/Room";
-// import Search from "../screens/Main/Search";
+import Restaurant from "../screens/Main/Restaurant";
+import Search from "../screens/Main/Search";
 import { BlurView } from "expo-blur";
 import { StyleSheet } from "react-native";
 
@@ -72,9 +72,9 @@ export default () => (
       component={Tabs}
       options={{ headerShown: false }}
     />
-    {/* <MainNavigator.Screen
-      name="RoomDetail"
-      component={Room}
+    <MainNavigator.Screen
+      name="RestaurantDetail"
+      component={Restaurant}
       options={{
         headerTransparent: true,
         headerBackground: () => (
@@ -90,6 +90,6 @@ export default () => (
       name="Search"
       options={{ headerShown: false }}
       component={Search}
-    /> */}
+    />
   </MainNavigator.Navigator>
 );

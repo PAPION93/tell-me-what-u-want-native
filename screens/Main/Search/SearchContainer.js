@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../../../api";
 import { useNavigation } from "@react-navigation/native";
 import { Keyboard } from "react-native";
@@ -7,19 +7,13 @@ import SearchPresenter from "./SearchPresenter";
 export default ({ token }) => {
   const navigation = useNavigation();
   const [searching, setSearching] = useState();
-  const [beds, setBeds] = useState();
-  const [bedrooms, setBedrooms] = useState();
-  const [bathrooms, setBathrooms] = useState();
-  const [maxPrice, setMaxPrice] = useState();
+  const [name, setName] = useState();
   const [results, setResults] = useState();
 
   const triggerSearch = async () => {
     setSearching(true);
     const form = {
-      ...(beds && { beds }),
-      ...(bedrooms && { bedrooms }),
-      ...(bathrooms && { bathrooms }),
-      ...(maxPrice && { max_price: maxPrice }),
+      ...(name && { name }),
     };
 
     try {
@@ -32,17 +26,12 @@ export default ({ token }) => {
       setSearching(false);
     }
   };
+
   return (
     <SearchPresenter
       navigation={navigation}
-      beds={beds}
-      setBeds={setBeds}
-      bedrooms={bedrooms}
-      setBedrooms={setBedrooms}
-      bathrooms={bathrooms}
-      setBathrooms={setBathrooms}
-      maxPrice={maxPrice}
-      setMaxPrice={setMaxPrice}
+      name={name}
+      setName={setName}
       searching={searching}
       triggerSearch={triggerSearch}
       results={results}

@@ -12,7 +12,6 @@ const restaurantsSlice = createSlice({
   },
   reducers: {
     setExploreRestaurants(state, action) {
-      const { explore } = state;
       const { payload } = action;
       if (payload.page === 1) {
         state.explore.restaurants = payload.restaurants;

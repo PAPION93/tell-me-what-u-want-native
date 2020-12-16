@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import DismissKeyboard from "../../../components/DismissKeyboard";
-import RoomCard from "../../../components/RoomCard";
+import RestaurantCard from "../../../components/RestaurantCard";
 import colors from "../../../colors";
 import { ActivityIndicator } from "react-native";
 
@@ -81,14 +81,8 @@ const Results = styled.ScrollView`
 
 export default ({
   navigation,
-  beds,
-  setBeds,
-  bedrooms,
-  setBedrooms,
-  bathrooms,
-  setBathrooms,
-  maxPrice,
-  setMaxPrice,
+  name,
+  setName,
   searching,
   triggerSearch,
   results,
@@ -97,7 +91,12 @@ export default ({
     <>
       <Container>
         <SearchContainer>
-          <SearchBar autoFocus={true} placeholder="Search By city..." />
+          <SearchBar
+            autoFocus={true}
+            onChangeText={(name) => setName(name)}
+            value={name}
+            placeholder="Search By city..."
+          />
           <CancleContainer onPress={() => navigation.goBack()}>
             <CancleText>Cancle</CancleText>
           </CancleContainer>
@@ -110,7 +109,7 @@ export default ({
             paddingHorizontal: 20,
           }}
         >
-          <FilterContainer>
+          {/* <FilterContainer>
             <FilterLabel>Beds</FilterLabel>
             <Filter
               onChangeText={(beds) => setBeds(beds)}
@@ -145,7 +144,7 @@ export default ({
               placeholder="$0"
               keyboardType={"number-pad"}
             />
-          </FilterContainer>
+          </FilterContainer> */}
         </FiltersContainer>
       </Container>
       <SearchBtn onPress={searching ? null : triggerSearch}>
@@ -155,20 +154,21 @@ export default ({
           <SearchText>Search</SearchText>
         )}
       </SearchBtn>
-      {results ? (
-        <ResultsText>Showing {results.count} results</ResultsText>
-      ) : null}
+      {results ? <ResultsText>총 {results.total}개의 결과</ResultsText> : null}
       <Results contentContainerStyle={{ paddingHorizontal: 15 }}>
-        {results?.results?.map((room) => (
-          <RoomCard
-            key={room.id}
-            id={room.id}
-            isFav={room.is_fav}
-            isSuperHost={room.user.superhost}
-            photos={room.photos}
-            name={room.name}
-            price={room.price}
-            roomObj={room}
+        {results?.data?.map((restaurant) => (
+          <RestaurantCard
+            key={restaurant.id}
+            id={restaurant.id}
+            name={restaurant.name}
+            category={restaurant.category}
+            address={restaurant.address}
+            google_point={restaurant.google_point}
+            naver_point={restaurant.naver_point}
+            dining_point={restaurant.dining_point}
+            isLiked={restaurant.likes_count}
+            photos={restaurant.images}
+            restaurantObj={restaurant}
           />
         ))}
       </Results>
