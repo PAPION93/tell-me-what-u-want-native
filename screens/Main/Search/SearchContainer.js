@@ -17,7 +17,7 @@ export default ({ token }) => {
     };
 
     try {
-      const { data } = await api.search(form, token);
+      const { data } = await api.search(1, form, token);
       setResults(data);
     } catch (e) {
       console.warn(e);

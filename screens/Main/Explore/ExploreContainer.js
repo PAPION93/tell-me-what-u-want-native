@@ -1,13 +1,7 @@
 import React, { useEffect } from "react";
 import ExplorePresenter from "./ExplorePresenter";
 
-export default ({
-  getRestaurants,
-  restaurants,
-  page,
-  increasePage,
-  navigation,
-}) => {
+export default ({ getRestaurants, restaurants, page, increasePage }) => {
   useEffect(() => {
     getRestaurants(1);
   }, []);

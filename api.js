@@ -7,6 +7,8 @@ const callApi = async (method, path, data, jwt, params = {}) => {
   };
   const baseUrl = "http://192.168.0.3:10080/api/v1";
   const fullUrl = `${baseUrl}${path}`;
+  console.log(fullUrl + method);
+  console.log(params);
   if (method === "get" || method === "delete") {
     return axios[method](fullUrl, { headers, params });
   } else {
@@ -18,7 +20,8 @@ export default {
   login: (form) => callApi("post", "/login/", form),
   register: (form) => callApi("post", "/register", form),
 
-  search: (form, token) => callApi("get", "/restaurants", null, token, form),
+  search: (page = 1, form, token) =>
+    callApi("get", `/restaurants/?page=${page}`, null, token, form),
   restaurants: (page = 1, token) =>
     callApi("get", `/restaurants/?page=${page}`, null, token),
 

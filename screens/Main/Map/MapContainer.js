@@ -4,9 +4,29 @@ import MapPresenter from "./MapPresenter";
 
 const { width, height } = Dimensions.get("screen");
 
-export default ({ restaurants }) => {
+export default ({
+  restaurants,
+  searchRestaurants,
+  page,
+  increaseSearchPage,
+}) => {
   const mapRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [lat, setLat] = useState(35.86120178015622);
+  const [lng, setLng] = useState(128.6458653270296);
+  const form = {
+    ...(lat && { lat }),
+    ...(lng && { lng }),
+  };
+
+  useEffect(() => {
+    searchRestaurants(1, form);
+  }, []);
+
+  useEffect(() => {
+    searchRestaurants(page, form);
+  }, [page]);
+
   const onScroll = (e) => {
     const {
       nativeEvent: {
@@ -38,6 +58,8 @@ export default ({ restaurants }) => {
   const handleRegionChange = async () => {
     try {
       const { northEast, southWest } = await mapRef.current?.getMapBoundaries();
+      console.log(northEast);
+      console.log(southWest);
     } catch (e) {
       console.warn(e);
     }
@@ -50,6 +72,9 @@ export default ({ restaurants }) => {
       currentIndex={currentIndex}
       onScroll={onScroll}
       onRegionChangeComplete={handleRegionChange}
+      increaseSearchPage={increaseSearchPage}
+      setLat={setLat}
+      setLng={setLng}
     />
   );
 };

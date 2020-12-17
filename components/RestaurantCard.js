@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
 import { Entypo } from "@expo/vector-icons";
@@ -102,15 +102,12 @@ const RestaurantCard = ({
 
       <TouchableOpacity
         style={{ alignItems: "flex-start" }}
-        onPress={() => navigation.navigate("RoomDetail", { ...restaurantObj })}
+        onPress={() =>
+          navigation.navigate("RestaurantDetail", { ...restaurantObj })
+        }
       >
         <PointContainer>
-          <Ionicons
-            size={13}
-            color={colors.red}
-            name="logo-google"
-            // name={getIconName(isFav)}
-          />
+          <Ionicons size={13} color={colors.red} name="logo-google" />
           <PointText>{google_point}</PointText>
         </PointContainer>
         <DescContainer>
@@ -142,7 +139,7 @@ RestaurantCard.prototype = {
   google_point: Pt.string.isRequired,
   naver_point: Pt.string.isRequired,
   dining_point: Pt.string.isRequired,
-  isFav: Pt.bool.isRequired,
+  isLiked: Pt.bool.isRequired,
   photos: Pt.arrayOf(
     Pt.shape({
       file: Pt.string,
