@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppLoading } from "expo";
+import AppLoading from "expo-app-loading";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Gate from "./components/Gate";
 import store, { persistor } from "./redux/store";
+import { Text } from "react-native";
 
 const cacheImages = (images) =>
   images.map((image) => {
@@ -27,7 +28,6 @@ export default function App() {
       require("./assets/logo.png"),
       require("./assets/loginBg.jpeg"),
     ];
-
     const fonts = [Ionicons.font];
     const imagesPromises = cacheImages(images);
     const fontPromises = cacheFonts(fonts);
