@@ -51,8 +51,8 @@ const Tabs = () => (
       },
     })}
   >
-    <TabsNavigator.Screen name="검색" component={Explore} />
     <TabsNavigator.Screen name="지도" component={MapScreen} />
+    <TabsNavigator.Screen name="검색" component={Explore} />
     <TabsNavigator.Screen name="저장 목록" component={Saved} />
     <TabsNavigator.Screen name="프로필" component={Profile} />
   </TabsNavigator.Navigator>
