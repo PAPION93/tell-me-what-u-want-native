@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components/native";
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, Button, Text } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import colors from "../../../colors";
 import { Ionicons } from "@expo/vector-icons";
+import colors from "../../../colors";
+import utils from "../../../utils";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -19,39 +20,40 @@ const ScrollView = styled.ScrollView`
   bottom: 30px;
 `;
 
-const RoomContainer = styled.View`
+const RestaurantContainer = styled.View`
   background-color: transparent;
   width: ${width}px;
   align-items: center;
 `;
 
-const RoomCard = styled.View`
+const RestaurantCard = styled.View`
   background-color: white;
   width: ${width - 50}px;
-  height: 100px;
-  /* margin-right: 20px; */
-  border-radius: 10px;
+  height: 110px;
+  border-radius: 15px;
   flex-direction: row;
   align-items: center;
 `;
 
-const RoomPhoto = styled.Image`
+const RestaurantPhoto = styled.Image`
   width: 100px;
   height: 100%;
-  border-radius: 5px;
-  margin-right: 20px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  margin-right: 15px;
 `;
 
 const Column = styled.View`
-  width: 70%;
+  width: 60%;
 `;
 
-const RoomName = styled.Text`
-  font-size: 18px;
+const RestaurantName = styled.Text`
+  font-size: 15px;
+  font-weight: 500;
 `;
 
-const RoomPrice = styled.Text`
-  font-size: 16px;
+const RestaurantCategory = styled.Text`
+  font-size: 13px;
   margin-top: 5px;
 `;
 
@@ -66,24 +68,47 @@ const MarkerContainer = styled.View`
   position: relative;
 `;
 
-const MarkerText = styled.View``;
-
-const MarkerTriangle = styled.View`
-  border: 10px solid transparent;
-  width: 10px;
-  border-top-color: ${(props) => (props.selected ? colors.red : colors.green)};
+const TOpacity = styled.TouchableOpacity`
+  position: absolute;
+  z-index: 10;
+  top: 50px;
 `;
 
-const RoomMarker = ({ selected, name }) => (
+const MoreBtn = styled.View`
+  background-color: white;
+  border-radius: 20px;
+  height: 35px;
+  width: 120px;
+  padding: 0px 15px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 5px 5px rgba(200, 200, 200, 1);
+`;
+
+const Moretext = styled.Text`
+  padding-left: 5px;
+  font-size: 15px;
+`;
+
+const PointContainer = styled.View`
+  flex-direction: row;
+  margin-bottom: 5px;
+`;
+
+const PointText = styled.Text`
+  font-size: 11px;
+  padding: 0px 3px;
+`;
+
+const RestaurantMarker = ({ selected, name }) => (
   <MarkerWrapper>
     <MarkerContainer selected={selected}>
-      <MarkerText>
-        <Ionicons
-          size={20}
-          name="fast-food-outline"
-          color={selected ? "white" : "black"}
-        ></Ionicons>
-      </MarkerText>
+      <Ionicons
+        size={20}
+        name="fast-food-outline"
+        color={selected ? "white" : "black"}
+      ></Ionicons>
     </MarkerContainer>
   </MarkerWrapper>
 );
@@ -94,16 +119,30 @@ export default ({
   currentIndex,
   onScroll,
   onRegionChangeComplete,
+  increaseSearchPage,
 }) => (
   <Container>
+    <TOpacity onPress={() => increaseSearchPage()}>
+      <MoreBtn>
+        <Ionicons
+          size={15}
+          name={utils.isAndroid() ? "md-refresh" : "ios-refresh-outline"}
+        ></Ionicons>
+        <Moretext>이 지역 검색</Moretext>
+      </MoreBtn>
+    </TOpacity>
     <MapView
       onRegionChangeComplete={onRegionChangeComplete}
       ref={mapRef}
       style={StyleSheet.absoluteFill}
       camera={{
         center: {
-          latitude: parseFloat(restaurants[0].lat),
-          longitude: parseFloat(restaurants[0].lng),
+          latitude: parseFloat(
+            restaurants.length !== 0 ? restaurants[0].lat : 35.861201
+          ),
+          longitude: parseFloat(
+            restaurants.length !== 0 ? restaurants[0].lng : 128.64586
+          ),
         },
         altitude: 2000,
         pitch: 0,
@@ -119,7 +158,7 @@ export default ({
             longitude: parseFloat(restaurant.lng),
           }}
         >
-          <RoomMarker
+          <RestaurantMarker
             selected={index === currentIndex}
             name={restaurant.name}
           />
@@ -134,9 +173,9 @@ export default ({
       pagingEnabled
     >
       {restaurants?.map((restaurant) => (
-        <RoomContainer key={restaurant.id}>
-          <RoomCard>
-            <RoomPhoto
+        <RestaurantContainer key={restaurant.id}>
+          <RestaurantCard>
+            <RestaurantPhoto
               source={
                 restaurant.images[0]?.file
                   ? { uri: restaurant.images[0]?.file }
@@ -144,11 +183,16 @@ export default ({
               }
             />
             <Column>
-              <RoomName>{restaurant.name}</RoomName>
-              <RoomPrice>{restaurant.category}</RoomPrice>
+              <PointContainer>
+                <Ionicons size={11} color={colors.red} name="logo-google" />
+                <PointText>{restaurant.google_point}</PointText>
+              </PointContainer>
+              <RestaurantName>{restaurant.name}</RestaurantName>
+              <RestaurantCategory>{restaurant.category}</RestaurantCategory>
+              <RestaurantCategory>{restaurant.address}</RestaurantCategory>
             </Column>
-          </RoomCard>
-        </RoomContainer>
+          </RestaurantCard>
+        </RestaurantContainer>
       ))}
     </ScrollView>
   </Container>

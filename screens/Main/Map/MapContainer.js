@@ -12,8 +12,8 @@ export default ({
 }) => {
   const mapRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [lat, setLat] = useState(35.86120178015622);
-  const [lng, setLng] = useState(128.6458653270296);
+  const [lat, setLat] = useState(35.86123);
+  const [lng, setLng] = useState(128.64581);
   const form = {
     ...(lat && { lat }),
     ...(lng && { lng }),
@@ -50,7 +50,7 @@ export default ({
   };
 
   useEffect(() => {
-    if (currentIndex !== 0) {
+    if (restaurants.length !== 0) {
       moveMap();
     }
   }, [currentIndex]);
@@ -58,8 +58,6 @@ export default ({
   const handleRegionChange = async () => {
     try {
       const { northEast, southWest } = await mapRef.current?.getMapBoundaries();
-      console.log(northEast);
-      console.log(southWest);
     } catch (e) {
       console.warn(e);
     }
@@ -73,8 +71,6 @@ export default ({
       onScroll={onScroll}
       onRegionChangeComplete={handleRegionChange}
       increaseSearchPage={increaseSearchPage}
-      setLat={setLat}
-      setLng={setLng}
     />
   );
 };

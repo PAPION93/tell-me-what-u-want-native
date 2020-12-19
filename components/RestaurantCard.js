@@ -17,6 +17,7 @@ const Container = styled.View`
   align-items: flex-start;
   position: relative;
 `;
+
 const PointContainer = styled.View`
   flex-direction: row;
   margin-bottom: 5px;

@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Gate from "./components/Gate";
 import store, { persistor } from "./redux/store";
-import { Text } from "react-native";
 
 const cacheImages = (images) =>
   images.map((image) => {
