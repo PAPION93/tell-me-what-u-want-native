@@ -120,9 +120,10 @@ export default ({
   onScroll,
   onRegionChangeComplete,
   increaseSearchPage,
+  search,
 }) => (
   <Container>
-    <TOpacity onPress={() => increaseSearchPage()}>
+    <TOpacity onPress={() => search()}>
       <MoreBtn>
         <Ionicons
           size={15}

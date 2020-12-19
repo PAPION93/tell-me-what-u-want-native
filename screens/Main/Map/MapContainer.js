@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Dimensions } from "react-native";
 import MapPresenter from "./MapPresenter";
+import { Provider } from "react-redux";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -12,11 +13,15 @@ export default ({
 }) => {
   const mapRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [lat, setLat] = useState(35.86123);
-  const [lng, setLng] = useState(128.64581);
+  const [northLat, setNorthLat] = useState(35.86123);
+  const [southLat, setSouthLat] = useState(35.96123);
+  const [eastLng, setEastLng] = useState(128.64581);
+  const [westLng, setWestLng] = useState(128.74581);
   const form = {
-    ...(lat && { lat }),
-    ...(lng && { lng }),
+    ...(northLat && { northLat }),
+    ...(southLat && { southLat }),
+    ...(eastLng && { eastLng }),
+    ...(westLng && { westLng }),
   };
 
   useEffect(() => {
@@ -59,9 +64,19 @@ export default ({
   const handleRegionChange = async () => {
     try {
       const { northEast, southWest } = await mapRef.current?.getMapBoundaries();
+      var { latitude, longitude } = northEast;
+      setNorthLat(latitude);
+      setEastLng(longitude);
+      var { latitude, longitude } = southWest;
+      setSouthLat(latitude);
+      setWestLng(longitude);
     } catch (e) {
       console.warn(e);
     }
+  };
+
+  const search = () => {
+    searchRestaurants(1, form);
   };
 
   return (
@@ -71,6 +86,7 @@ export default ({
       currentIndex={currentIndex}
       onScroll={onScroll}
       onRegionChangeComplete={handleRegionChange}
+      search={search}
       increaseSearchPage={increaseSearchPage}
     />
   );
