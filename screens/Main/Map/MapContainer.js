@@ -33,7 +33,8 @@ export default ({
         contentOffset: { x },
       },
     } = e;
-    const position = Math.abs(Math.floor(x / width));
+    const position = Math.floor(x / width);
+    if (position < 0) return false;
     setCurrentIndex(position);
   };
 
