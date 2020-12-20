@@ -8,8 +8,9 @@ const { width, height } = Dimensions.get("screen");
 export default ({
   restaurants,
   searchRestaurants,
-  page,
   increaseSearchPage,
+  page,
+  next_page_url,
 }) => {
   const mapRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -51,13 +52,15 @@ export default ({
           longitude: parseFloat(restaurants[currentIndex].lng),
         },
       },
-      { duration: 500 }
+      { duration: 100 }
     );
   };
 
   useEffect(() => {
     if (restaurants.length !== 0) {
       moveMap();
+      if (restaurants.length - 1 == currentIndex && next_page_url != null)
+        increaseSearchPage();
     }
   }, [currentIndex]);
 
@@ -75,7 +78,8 @@ export default ({
     }
   };
 
-  const search = () => {
+  const searchThisPlace = () => {
+    setCurrentIndex(0);
     searchRestaurants(1, form);
   };
 
@@ -86,8 +90,7 @@ export default ({
       currentIndex={currentIndex}
       onScroll={onScroll}
       onRegionChangeComplete={handleRegionChange}
-      search={search}
-      increaseSearchPage={increaseSearchPage}
+      searchThisPlace={searchThisPlace}
     />
   );
 };

@@ -119,11 +119,10 @@ export default ({
   currentIndex,
   onScroll,
   onRegionChangeComplete,
-  increaseSearchPage,
-  search,
+  searchThisPlace,
 }) => (
   <Container>
-    <TOpacity onPress={() => search()}>
+    <TOpacity onPress={() => searchThisPlace()}>
       <MoreBtn>
         <Ionicons
           size={15}
@@ -133,7 +132,7 @@ export default ({
       </MoreBtn>
     </TOpacity>
     <MapView
-      onRegionChangeComplete={onRegionChangeComplete}
+      onRegionChangeComplete={() => onRegionChangeComplete()}
       ref={mapRef}
       style={StyleSheet.absoluteFill}
       camera={{

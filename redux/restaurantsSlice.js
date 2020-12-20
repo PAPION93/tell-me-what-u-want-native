@@ -11,6 +11,7 @@ const restaurantsSlice = createSlice({
     search: {
       page: 1,
       restaurants: [],
+      next_page_url: null,
     },
     favs: [],
   },
@@ -37,6 +38,7 @@ const restaurantsSlice = createSlice({
       } else {
         search.restaurants = [...search.restaurants, ...payload.restaurants];
       }
+      search.next_page_url = payload.next_page_url;
     },
     increaseSearchPage(state, action) {
       state.search.page += 1;
@@ -108,12 +110,13 @@ export const searchRestaurants = (page, form) => async (dispatch, getState) => {
   } = getState();
   try {
     const {
-      data: { data },
+      data: { data, next_page_url },
     } = await api.search(page, form, token);
     dispatch(
       setSearchRestaurants({
         restaurants: data,
         page,
+        next_page_url,
       })
     );
   } catch (e) {

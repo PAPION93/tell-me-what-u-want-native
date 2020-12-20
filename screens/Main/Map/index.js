@@ -9,6 +9,7 @@ function mapStateToProps(state) {
   return {
     restaurants: state.restaurantsReducer.search.restaurants,
     page: state.restaurantsReducer.search.page,
+    next_page_url: state.restaurantsReducer.search.next_page_url,
   };
 }
 
