@@ -7,47 +7,36 @@ import colors from "../../colors";
 import utils from "../../utils";
 
 const Container = styled.View``;
+
 const DataContainer = styled.View`
   padding: 0px 20px;
 `;
 const Address = styled.Text`
   margin-top: 10px;
-  font-size: 24px;
+  font-size: 20px;
 `;
 
-const PropertyInfoContainer = styled.View`
-  margin-top: 20px;
-  flex-direction: row;
-`;
-
-const PropertyInfoData = styled.View`
-  background-color: ${colors.green};
-  margin-right: 10px;
-  border-radius: 5px;
-`;
-
-const PropertyInfoText = styled.Text`
-  color: white;
-  font-weight: 500;
-  padding: 5px 10px;
-`;
-
-const CheckContainer = styled.View`
-  margin-top: 40px;
-`;
-
-const CheckTitleContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-
-const CheckTitle = styled.Text`
-  font-size: 18px;
-  margin-left: 15px;
-`;
-
-const CheckTime = styled.Text`
+const Category = styled.Text`
   margin-top: 10px;
+  font-size: 18px;
+`;
+
+const PointContainer = styled.View`
+  flex-direction: row;
+  text-align: center;
+  margin-bottom: 5px;
+`;
+
+const Navertext = styled.Text`
+  color: #00cf5b;
+  font-size: 16px;
+  font-weight: 900;
+`;
+
+const PointText = styled.Text`
+  padding: 0px 5px;
+  font-size: 15px;
+  margin-right: 10px;
 `;
 
 const MapContainer = styled.View`
@@ -77,32 +66,19 @@ export default ({ route: { params }, navigation }) => {
     <Container>
       <RestaurantPhotos photos={params.images} factor={2} />
       <DataContainer>
-        <Address>{params.address}</Address>
-        <PropertyInfoContainer>
-          <PropertyInfoData>
-            <PropertyInfoText>{formatQtt(params.name, "bed")}</PropertyInfoText>
-          </PropertyInfoData>
-          <PropertyInfoData>
-            <PropertyInfoText>
-              {formatQtt(params.name, "bedroom")}
-            </PropertyInfoText>
-          </PropertyInfoData>
-          <PropertyInfoData>
-            <PropertyInfoText>
-              {formatQtt(params.name, "bathroom")}
-            </PropertyInfoText>
-          </PropertyInfoData>
-        </PropertyInfoContainer>
-        <CheckContainer>
-          <CheckTitleContainer>
-            <Ionicons
-              name={utils.isAndroid ? "md-timer" : "ios-timer"}
-              size={24}
-            ></Ionicons>
-            <CheckTitle>Check-in / Check-out</CheckTitle>
-          </CheckTitleContainer>
-          <CheckTime>{params.name}</CheckTime>
-        </CheckContainer>
+        <PointContainer>
+          <Ionicons size={15} color={"#1a0dab"} name="logo-google" />
+          <PointText>
+            {params.google_point == "리" ? "리뷰없음" : params.google_point}
+          </PointText>
+
+          <Navertext font-color={colors.green}>N</Navertext>
+          <PointText>
+            {params.naver_point ? params.naver_point : "리뷰없음"}
+          </PointText>
+        </PointContainer>
+        <Address>{params.category}</Address>
+        <Category>{params.address}</Category>
         <MapContainer>
           <MapView
             camera={{
