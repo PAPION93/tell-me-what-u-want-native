@@ -26,7 +26,7 @@ const RestaurantContainer = styled.View`
   align-items: center;
 `;
 
-const RestaurantCard = styled.View`
+const RestaurantCard = styled.TouchableOpacity`
   background-color: white;
   width: ${width - 50}px;
   height: 110px;
@@ -120,6 +120,7 @@ export default ({
   onScroll,
   onRegionChangeComplete,
   searchThisPlace,
+  navigation,
 }) => (
   <Container>
     <TOpacity onPress={() => searchThisPlace()}>
@@ -174,7 +175,11 @@ export default ({
     >
       {restaurants?.map((restaurant) => (
         <RestaurantContainer key={restaurant.id}>
-          <RestaurantCard>
+          <RestaurantCard
+            onPress={() =>
+              navigation.navigate("RestaurantDetail", { ...restaurant })
+            }
+          >
             <RestaurantPhoto
               source={
                 restaurant.images[0]?.file

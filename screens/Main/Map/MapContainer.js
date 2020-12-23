@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 import MapPresenter from "./MapPresenter";
 import { Provider } from "react-redux";
@@ -13,6 +14,7 @@ export default ({
   next_page_url,
 }) => {
   const mapRef = useRef();
+  const navigation = useNavigation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [northLat, setNorthLat] = useState(35.86123);
   const [southLat, setSouthLat] = useState(35.96123);
@@ -91,6 +93,7 @@ export default ({
       onScroll={onScroll}
       onRegionChangeComplete={handleRegionChange}
       searchThisPlace={searchThisPlace}
+      navigation={navigation}
     />
   );
 };
