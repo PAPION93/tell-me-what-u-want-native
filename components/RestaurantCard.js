@@ -24,7 +24,13 @@ const PointContainer = styled.View`
 `;
 
 const PointText = styled.Text`
-  padding: 0px 3px;
+  padding: 0px 5px;
+  margin-right: 10px;
+`;
+
+const Navertext = styled.Text`
+  color: #00cf5b;
+  font-weight: 900;
 `;
 
 const DescContainer = styled.View`
@@ -108,9 +114,15 @@ const RestaurantCard = ({
         }
       >
         <PointContainer>
-          <Ionicons size={13} color={colors.red} name="logo-google" />
-          <PointText>{google_point}</PointText>
+          <Ionicons size={13} color={"1a0dab"} name="logo-google" />
+          <PointText>
+            {google_point == "리" ? "리뷰없음" : google_point}
+          </PointText>
+
+          <Navertext font-color={colors.green}>N</Navertext>
+          <PointText>{naver_point ? naver_point : "리뷰없음"}</PointText>
         </PointContainer>
+
         <DescContainer>
           <Name>{name}</Name>
           <Dot>

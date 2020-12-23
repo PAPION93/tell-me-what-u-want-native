@@ -98,7 +98,13 @@ const PointContainer = styled.View`
 
 const PointText = styled.Text`
   font-size: 11px;
-  padding: 0px 3px;
+  padding: 0px 5px;
+  margin-right: 10px;
+`;
+
+const Navertext = styled.Text`
+  color: #00cf5b;
+  font-weight: 900;
 `;
 
 const RestaurantMarker = ({ selected, name }) => (
@@ -190,7 +196,16 @@ export default ({
             <Column>
               <PointContainer>
                 <Ionicons size={11} color={colors.red} name="logo-google" />
-                <PointText>{restaurant.google_point}</PointText>
+                <PointText>
+                  {restaurant.google_point == "리"
+                    ? "리뷰없음"
+                    : restaurant.google_point}
+                </PointText>
+
+                <Navertext font-color={colors.green}>N</Navertext>
+                <PointText>
+                  {restaurant.naver_point ? restaurant.naver_point : "리뷰없음"}
+                </PointText>
               </PointContainer>
               <RestaurantName>{restaurant.name}</RestaurantName>
               <RestaurantCategory>{restaurant.category}</RestaurantCategory>
