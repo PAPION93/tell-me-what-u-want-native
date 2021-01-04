@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
 import RestaurantPhotos from "../../../components/RestaurantPhotos";
 import colors from "../../../colors";
+import { Text } from "react-native";
 
 const Container = styled.View``;
 
@@ -44,7 +45,7 @@ const MapContainer = styled.View`
   margin-top: 30px;
 `;
 
-export default ({ params }) => (
+export default ({ params, naverBlogs }) => (
   <Container>
     <RestaurantPhotos photos={params.images} factor={2} />
     <DataContainer>
@@ -84,6 +85,7 @@ export default ({ params }) => (
             }}
           />
         </MapView>
+        <Text> 블로그 개수 : {naverBlogs.total}</Text>
       </MapContainer>
     </DataContainer>
   </Container>

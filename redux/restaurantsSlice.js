@@ -93,12 +93,28 @@ export const getRestaurants = (page) => async (dispatch, getState) => {
     const {
       data: { data },
     } = await api.restaurants(page, token);
+
     dispatch(
       setExploreRestaurants({
         restaurants: data,
         page,
       })
     );
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
+export const getRestaurant = (id) => async (getState) => {
+  const {
+    usersReducer: { token },
+  } = getState();
+
+  try {
+    const {
+      data: { naver_blogs },
+    } = await api.restaurantDetail(id, token);
+    console.log(naver_blogs);
   } catch (e) {
     console.warn(e);
   }

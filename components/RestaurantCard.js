@@ -114,7 +114,7 @@ const RestaurantCard = ({
         }
       >
         <PointContainer>
-          <Ionicons size={13} color={"1a0dab"} name="logo-google" />
+          <Ionicons size={13} color="blue" name="logo-google" />
           <PointText>
             {google_point == "리" ? "리뷰없음" : google_point}
           </PointText>

@@ -7,7 +7,7 @@ const callApi = async (method, path, data, jwt, params = {}) => {
   };
   const baseUrl = "http://localhost:10080/api/v1";
   const fullUrl = `${baseUrl}${path}`;
-  // console.log(fullUrl);
+  console.log(fullUrl + " " + method);
   // console.log(params);
   if (method === "get" || method === "delete") {
     return axios[method](fullUrl, { headers, params });
@@ -23,7 +23,9 @@ export default {
   search: (page = 1, form, token) =>
     callApi("get", `/restaurants/?page=${page}`, null, token, form),
   restaurants: (page = 1, token) =>
-    callApi("get", `/restaurants/?page=${page}`, null, token),
+    callApi("get", `/restaurants/?page=${page}`, null, null),
+  restaurantDetail: (restaurantId, token) =>
+    callApi("get", `/restaurants/${restaurantId}`, null, null),
 
   favs: (token) => callApi("get", `/users/me/likes`, null, token),
   like: (restaurantId, token) =>
