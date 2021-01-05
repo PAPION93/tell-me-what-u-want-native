@@ -7,7 +7,7 @@ export default ({ route: { params }, navigation }) => {
 
   useEffect(() => {
     async function getRestaurant() {
-      let {
+      const {
         data: { naver_blogs },
       } = await api.restaurantDetail(params.id, null);
 
@@ -19,5 +19,6 @@ export default ({ route: { params }, navigation }) => {
 
     navigation.setOptions({ title: params.name });
   }, []);
+
   return <RestaurantPresenter params={params} naverBlogs={naverBlogs} />;
 };
