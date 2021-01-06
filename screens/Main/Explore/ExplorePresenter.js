@@ -76,6 +76,7 @@ export default ({ restaurants, increasePage }) => {
                 address={restaurant.address}
                 google_point={restaurant.google_point}
                 naver_point={restaurant.naver_point}
+                kakao_point={restaurant.kakao_point}
                 dining_point={restaurant.dining_point}
                 isLiked={restaurant.likes_count}
                 photos={restaurant.images}

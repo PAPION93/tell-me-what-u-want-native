@@ -34,6 +34,11 @@ const Navertext = styled.Text`
   font-weight: 900;
 `;
 
+const Kakaotext = styled.Text`
+  color: #fee500;
+  font-weight: 900;
+`;
+
 const PointText = styled.Text`
   padding: 0px 5px;
   font-size: 15px;
@@ -96,7 +101,7 @@ export default ({ params, naverBlogs }) => (
       <RestaurantPhotos photos={params.images} factor={2} />
       <DataContainer>
         <PointContainer>
-          <Ionicons size={15} color={"#1a0dab"} name="logo-google" />
+          <Ionicons size={15} color={colors.red} name="logo-google" />
           <PointText>
             {params.google_point == "리" ? "리뷰없음" : params.google_point}
           </PointText>
@@ -104,6 +109,11 @@ export default ({ params, naverBlogs }) => (
           <Navertext font-color={colors.naver}>N</Navertext>
           <PointText>
             {params.naver_point ? params.naver_point : "리뷰없음"}
+          </PointText>
+
+          <Kakaotext>K</Kakaotext>
+          <PointText>
+            {params.kakao_point ? params.kakao_point : "리뷰없음"}
           </PointText>
         </PointContainer>
         <Address>{params.category}</Address>

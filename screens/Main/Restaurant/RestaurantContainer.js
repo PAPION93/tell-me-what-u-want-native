@@ -12,7 +12,6 @@ export default ({ route: { params }, navigation }) => {
       } = await api.restaurantDetail(params.id, null);
 
       setNaverBlogs(naver_blogs);
-      console.log(naver_blogs);
     }
 
     getRestaurant();

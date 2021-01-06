@@ -33,6 +33,11 @@ const Navertext = styled.Text`
   font-weight: 900;
 `;
 
+const Kakaotext = styled.Text`
+  color: #fee500;
+  font-weight: 900;
+`;
+
 const DescContainer = styled.View`
   flex-direction: row;
 `;
@@ -84,6 +89,7 @@ const RestaurantCard = ({
   address,
   google_point,
   naver_point,
+  kakao_point,
   dining_point,
   isLiked,
   photos,
@@ -114,13 +120,16 @@ const RestaurantCard = ({
         }
       >
         <PointContainer>
-          <Ionicons size={13} color="blue" name="logo-google" />
+          <Ionicons size={13} color={colors.red} name="logo-google" />
           <PointText>
             {google_point == "리" ? "리뷰없음" : google_point}
           </PointText>
 
-          <Navertext font-color={colors.green}>N</Navertext>
+          <Navertext>N</Navertext>
           <PointText>{naver_point ? naver_point : "리뷰없음"}</PointText>
+
+          <Kakaotext>K</Kakaotext>
+          <PointText>{kakao_point ? kakao_point : "리뷰없음"}</PointText>
         </PointContainer>
 
         <DescContainer>

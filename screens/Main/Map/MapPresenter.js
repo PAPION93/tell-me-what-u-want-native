@@ -107,6 +107,11 @@ const Navertext = styled.Text`
   font-weight: 900;
 `;
 
+const Kakaotext = styled.Text`
+  color: #fee500;
+  font-weight: 900;
+`;
+
 const RestaurantMarker = ({ selected, name }) => (
   <MarkerWrapper>
     <MarkerContainer selected={selected}>
@@ -202,9 +207,14 @@ export default ({
                     : restaurant.google_point}
                 </PointText>
 
-                <Navertext font-color={colors.green}>N</Navertext>
+                <Navertext>N</Navertext>
                 <PointText>
                   {restaurant.naver_point ? restaurant.naver_point : "리뷰없음"}
+                </PointText>
+
+                <Kakaotext>K</Kakaotext>
+                <PointText>
+                  {restaurant.kakao_point ? restaurant.kakao_point : "리뷰없음"}
                 </PointText>
               </PointContainer>
               <RestaurantName>{restaurant.name}</RestaurantName>

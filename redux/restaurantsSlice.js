@@ -105,21 +105,6 @@ export const getRestaurants = (page) => async (dispatch, getState) => {
   }
 };
 
-export const getRestaurant = (id) => async (getState) => {
-  const {
-    usersReducer: { token },
-  } = getState();
-
-  try {
-    const {
-      data: { naver_blogs },
-    } = await api.restaurantDetail(id, token);
-    console.log(naver_blogs);
-  } catch (e) {
-    console.warn(e);
-  }
-};
-
 export const searchRestaurants = (page, form) => async (dispatch, getState) => {
   const {
     usersReducer: { token },
