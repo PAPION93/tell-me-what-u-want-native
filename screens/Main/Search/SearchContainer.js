@@ -9,6 +9,7 @@ export default ({ token }) => {
   const [searching, setSearching] = useState();
   const [name, setName] = useState();
   const [results, setResults] = useState();
+  const [page, setPage] = useState(1);
 
   const triggerSearch = async () => {
     setSearching(true);
@@ -17,7 +18,7 @@ export default ({ token }) => {
     };
 
     try {
-      const { data } = await api.search(1, form, token);
+      const { data } = await api.search(page, form, token);
       setResults(data);
     } catch (e) {
       console.warn(e);
@@ -27,6 +28,11 @@ export default ({ token }) => {
     }
   };
 
+  const increasePage = () => {
+    setPage(page + 1);
+    triggerSearch();
+  };
+
   return (
     <SearchPresenter
       navigation={navigation}
@@ -34,6 +40,7 @@ export default ({ token }) => {
       setName={setName}
       searching={searching}
       triggerSearch={triggerSearch}
+      increasePage={increasePage}
       results={results}
     />
   );

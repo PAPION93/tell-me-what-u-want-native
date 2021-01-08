@@ -4,6 +4,7 @@ import DismissKeyboard from "../../../components/DismissKeyboard";
 import RestaurantCard from "../../../components/RestaurantCard";
 import colors from "../../../colors";
 import { ActivityIndicator } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Container = styled.View`
   padding: 0px;
@@ -14,7 +15,7 @@ const SearchContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 0px 20px;
 `;
 const SearchBar = styled.TextInput`
   height: 40px;
@@ -55,14 +56,6 @@ const Filter = styled.TextInput`
   width: 80px;
 `;
 
-const SearchBtn = styled.TouchableOpacity`
-  background-color: ${colors.red};
-  padding: 10px;
-  margin: 10px 30px;
-  border-radius: 10px;
-  align-items: center;
-`;
-
 const SearchText = styled.Text`
   color: white;
   font-weight: 600;
@@ -70,13 +63,37 @@ const SearchText = styled.Text`
 `;
 
 const ResultsText = styled.Text`
-  margin-top: 10px;
   font-size: 16px;
   text-align: center;
 `;
 
 const Results = styled.ScrollView`
-  margin-top: 25px;
+  padding-top: 10px;
+  margin-top: 10px;
+`;
+
+const SearchBtn = styled.TouchableOpacity`
+  width: 80%;
+  padding: 10px;
+  margin: 10px 30px;
+  border-radius: 10px;
+  background-color: ${colors.red};
+  align-items: center;
+`;
+
+const LoadMore = styled.View`
+  width: 100%;
+  padding: 10px 10px;
+  align-items: center;
+  background-color: #006a70;
+  border-radius: 5px;
+  margin-bottom: 30px;
+`;
+
+const LoadMoreText = styled.Text`
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
 `;
 
 export default ({
@@ -85,6 +102,7 @@ export default ({
   setName,
   searching,
   triggerSearch,
+  increasePage,
   results,
 }) => (
   <DismissKeyboard>
@@ -95,7 +113,7 @@ export default ({
             autoFocus={true}
             onChangeText={(name) => setName(name)}
             value={name}
-            placeholder="Search By city..."
+            placeholder="Search By Name..."
           />
           <CancleContainer onPress={() => navigation.goBack()}>
             <CancleText>Cancle</CancleText>
@@ -171,6 +189,13 @@ export default ({
             restaurantObj={restaurant}
           />
         ))}
+        {results?.next_page_url == null ? null : (
+          <TouchableOpacity onPress={increasePage}>
+            <LoadMore>
+              <LoadMoreText>Load More</LoadMoreText>
+            </LoadMore>
+          </TouchableOpacity>
+        )}
       </Results>
     </>
   </DismissKeyboard>
