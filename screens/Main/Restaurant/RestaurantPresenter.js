@@ -147,7 +147,7 @@ export default ({ params, naverBlogs }) => (
           <FakeText>네이버 블로그({naverBlogs.total})</FakeText>
         </FakeBar>
         {naverBlogs?.items?.map((item) => (
-          <BlogContainer key={item.id}>
+          <BlogContainer key={item.link}>
             <BlogCard onPress={() => Linking.openURL(`${item.link}`)}>
               <BlogName>{item.title}</BlogName>
               <BlogCategory>{item.description}</BlogCategory>
