@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
 import RestaurantPhotos from "../../../components/RestaurantPhotos";
 import colors from "../../../colors";
-import Moment from "moment";
+import { WebView } from "react-native-webview";
 
 const Container = styled.View``;
 
@@ -146,6 +146,19 @@ export default ({ params, naverBlogs }) => (
         <FakeBar>
           <FakeText>네이버 블로그({naverBlogs.total})</FakeText>
         </FakeBar>
+        <WebView
+          source={{
+            uri:
+              "https://m.search.naver.com/search.naver?where=m_view&sm=mtb_jum&query=대구+" +
+              params.name,
+          }}
+          style={{
+            marginBottom: 20,
+            height: 400,
+            borderBottomRightRadius: 15,
+            borderBottomLeftRadius: 15,
+          }}
+        />
         {naverBlogs?.items?.map((item) => (
           <BlogContainer key={item.link}>
             <BlogCard onPress={() => Linking.openURL(`${item.link}`)}>
